@@ -96,6 +96,7 @@ class JsEditor {
     		}
   	});
   	aceEditor.setTheme("ace/theme/clouds");
+    aceEditor.focus();
             
     runButton.click(() => this._executeCode(aceEditor.getValue(), scriptBlock));    
     saveButton.click(() => this._saveCode(aceEditor.getValue()));
@@ -104,6 +105,9 @@ class JsEditor {
   }
 }
 
+var _jsEditor;
+
 $(function() {
-  new JsEditor($('#jsEditor'), jsEditorMessages).init();
+  _jsEditor = new JsEditor($('#jsEditor'), jsEditorMessages);
+  _jsEditor.init();
 });
