@@ -1,0 +1,29 @@
+body {
+  padding: 1%;
+  background-color: lightsteelblue;
+}
+
+#jsEditor #_editor_ {
+  width: 50%;
+  height: 25em;
+  padding: 1em;
+  font-size: 1em;
+}
+#jsEditor .controls {
+  float: left;
+}
+#jsEditor .controls .button {
+  margin-right: 1em;
+  padding: 0 1.5em 0.2em 1.5em;
+  font-size: 1.2em;
+  background-color: steelblue;
+  color: white;
+}
+
+body.theme-dracula {
+  background-color: black;
+}
+.theme-dracula #jsEditor .controls .button {
+  background-color: #282a36;
+  color: white;
+}
