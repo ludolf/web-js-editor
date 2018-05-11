@@ -41,8 +41,8 @@ class JsEditor {
     scriptBlock.html(scriptEl);  
   }
   
-  _saveCode(blob) {
-    let blob = new Blob([blob], {type: 'text/plain;charset=utf-8'});
+  _saveCode(code) {
+    let blob = new Blob([code], {type: 'text/plain;charset=utf-8'});
     saveAs(blob, 'jseditor.txt'); 
   }
   
@@ -60,13 +60,13 @@ class JsEditor {
   }
   
   init() {
-    const code = $('<pre id="_editor_">' + this._msg('defaultCode') + '</pre>');
-    const form = $('<form action="#" class="form"></form>');
-    const scriptBlock = $('<div class="script" style="display:none"></div>');
+    const code = $('<pre id="editor">' + this._msg('defaultCode') + '</pre>');
+    const form = $('<form action="#" id="form"></form>');
+    const scriptBlock = $('<div id="script" style="display:none"></div>');
     
-    const controls = $('<div class="controls"></div>');
+    const controls = $('<div id="controls"></div>');
     
-    const themes = $('<select class="themes">'
+    const themes = $('<select id="themes">'
         + '<option value="clouds">' + this._msg('theme_clouds') + '</option>'
         + '<option value="dracula">' + this._msg('theme_dracula') + '</option>'
       + '</select>');
@@ -86,7 +86,7 @@ class JsEditor {
     
     const executeCode = this._executeCode;
                                               
-    const aceEditor = ace.edit("_editor_");
+    const aceEditor = ace.edit("editor");
     aceEditor.session.setMode("ace/mode/javascript");
     aceEditor.commands.addCommand({
     		name: 'Execute',
