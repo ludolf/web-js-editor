@@ -60,7 +60,9 @@ class JsEditor {
   }
   
   init() {
-    const code = $('<pre id="editor">' + this._msg('defaultCode') + '</pre>');
+    const defaultCode = this._jsEditor.html() ? this._jsEditor.html() : this._msg('defaultCode');
+  
+    const code = $('<pre id="editor">' + defaultCode + '</pre>');
     const form = $('<form action="#" id="form"></form>');
     const scriptBlock = $('<div id="script" style="display:none"></div>');
     
