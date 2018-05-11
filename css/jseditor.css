@@ -12,18 +12,31 @@ body {
 #jsEditor #controls {
   float: left;
 }
-#jsEditor #controls .button {
+#jsEditor #controls .button{
   margin-right: 1em;
   padding: 0 1.5em 0.2em 1.5em;
+  border: 0;
   font-size: 1.2em;
   background-color: steelblue;
   color: white;
+}
+#jsEditor #themes {
+  color: gray;
+  background-color: white;
+  font-size: 1em;
+  padding: 0 1em 0.2em 1em;
+  margin-right: 1em;
+  border: 0;
 }
 
 body.theme-dracula {
   background-color: black;
 }
-.theme-dracula #jsEditor .controls .button {
-  background-color: #282a36;
+.theme-dracula #jsEditor #controls .button {
+  background-color: gray;
   color: white;
 }
+.theme-dracula #jsEditor #themes {
+  background-color: #282a36;
+  color: white;
+}       

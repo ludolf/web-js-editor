@@ -84,6 +84,8 @@ class JsEditor {
     this._jsEditor.html(form);    
     this._jsEditor.append(scriptBlock);
     
+    themes.height(runButton.height());
+    
     const executeCode = this._executeCode;
                                               
     const aceEditor = ace.edit("editor");
