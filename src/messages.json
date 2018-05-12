@@ -1,0 +1,18 @@
+{
+  "def": {
+    "title": "Ludolf's Editor",
+    "defaultCode": "alert(\"Let your code dance!\");",
+    "runButton": "Run it!",
+    "saveButton": "Save",
+    "theme_clouds": "Clouds",
+    "theme_dracula": "Dracula"
+  },
+  "de": {
+    "title": "Ludolfs Editor",
+    "defaultCode": "alert(\"Lass deinen Code tanzen!\");",
+    "runButton": "Ausführen!",
+    "saveButton": "Speichern",
+    "theme_clouds": "Wolken",
+    "theme_dracula": "Dracula"
+  }
+}
