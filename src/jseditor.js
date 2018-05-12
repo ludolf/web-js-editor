@@ -1,8 +1,11 @@
+import 'bootstrap-css-only/css/bootstrap.min.css';
 import './jseditor.css';
-import Messages from './messages.json';
 
 import $ from 'jquery-slim';
+import ace from 'ace-builds/src-min-noconflict/ace.js';
 import FileSave from 'file-saver';
+
+import Messages from './messages.json';
 
 class JsEditorMessages {
 
@@ -80,13 +83,22 @@ class JsEditor {
 
     themes.height(runButton.height());
 
-    const executeCode = this._executeCode;
+    const aceEditor = this._setupEditor(this._executeCode, scriptBlock);
+
+    runButton.click(() => this._executeCode(aceEditor.getValue(), scriptBlock));
+    saveButton.click(() => this._saveCode(aceEditor.getValue()));
+
+    themes.change(() => this._changeTheme(themes.val(), aceEditor));
+  }
+
+  _setupEditor(executeCode, scriptBlock) {
+    ace.config.set('basePath', 'js/ace');
 
     const aceEditor = ace.edit("editor");
     aceEditor.session.setMode("ace/mode/javascript");
     aceEditor.commands.addCommand({
         name: 'Execute',
-        bindKey: {win: 'Ctrl-Enter',  mac: 'Command-Enter'},
+        bindKey: { win: 'Ctrl-Enter',  mac: 'Command-Enter' },
         exec: function(editor) {
              executeCode(editor.getValue(), scriptBlock);
         }
@@ -94,10 +106,7 @@ class JsEditor {
     aceEditor.setTheme("ace/theme/clouds");
     aceEditor.focus();
 
-    runButton.click(() => this._executeCode(aceEditor.getValue(), scriptBlock));
-    saveButton.click(() => this._saveCode(aceEditor.getValue()));
-
-    themes.change(() => this._changeTheme(themes.val(), aceEditor));
+    return aceEditor;
   }
 }
 
@@ -117,4 +126,5 @@ $(function() {
   _jsEditor.init();
   
   document.title = jsEditorMessages.msg('title');
+
 });
