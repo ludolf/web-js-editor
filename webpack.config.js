@@ -1,5 +1,7 @@
 const path = require('path');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/jseditor.js',
@@ -14,32 +16,28 @@ module.exports = {
                     'style-loader',
                     'css-loader'
                 ]
-            }, {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
-            }, {
-                 test: /ace(.+)(mode|theme)(.+)\.js$/,
-                 use: [{
-                    loader:'file-loader',
-                    options: {
-                        name: '[name].js',
-                        outputPath: 'ace'
-                    }
-                 }]
-             }
+            }
         ]
     },
+    externals: {
+      'jquery-slim': 'jQuery'
+    },
     plugins: [
-        new CopyWebpackPlugin([ {
-                from: 'resources/*',
-                to: path.resolve(__dirname, 'dist'),
-                flatten: true
+        new CleanWebpackPlugin([
+            'dist'
+        ]),
+        new CopyWebpackPlugin([{
+               from: 'resources/*',
+               to: path.resolve(__dirname, 'dist'),
+               flatten: true
             }, {
-                from: 'node_modules/ace-builds/src-min-noconflict/mode-javascript.js',
-                to: path.resolve(__dirname, 'dist/js/ace'),
-                flatten: true
+               from: 'node_modules/jquery-slim/dist/jquery.slim.min.js',
+               to: path.resolve(__dirname, 'dist/js/jquery'),
+               flatten: true
+            }, {
+               from: 'node_modules/ace-builds/src-min-noconflict/mode-javascript.js',
+               to: path.resolve(__dirname, 'dist/js/ace'),
+               flatten: true
             }, {
                from: 'node_modules/ace-builds/src-min-noconflict/worker-javascript.js',
                to: path.resolve(__dirname, 'dist/js/ace'),
