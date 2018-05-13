@@ -7,17 +7,21 @@ import FileSave from 'file-saver';
 
 import Messages from './messages.json';
 
-const JsEditorMessages = function(messages) {
+const JsEditorMessages = function(messages, defLang) {
 
-    this._default_lang = 'def';
+    this._default_lang_name = 'en';
     this._messages = messages;
+    this._defCustomLang = defLang;
 
     this.msg = function(title) {
-        let lang = (window.navigator && window.navigator.language) ? window.navigator.language.substring(0, 2) : this._default_lang;
 
-        return (this._messages[lang] && this._messages[lang][title]) ? this._messages[lang][title] :
-          (this._messages[this._default_lang][title]) ? this._messages[this._default_lang][title] :
-             title;
+        const lang = this._defCustomLang ? this._defCustomLang.toLowerCase()
+            : (window.navigator && window.navigator.language) ? window.navigator.language.substring(0, 2)
+                : this._default_lang_name;
+
+        return (this._messages[lang] && this._messages[lang][title]) ? this._messages[lang][title]
+            : this._messages[this._default_lang_name][title] ? this._messages[this._default_lang_name][title]
+                : title;
     }
 }
 
@@ -92,7 +96,7 @@ const JsEditor = function(container, jsMessages, saveAsFile) {
 
     this._setupControls = function(container, executeCode, saveCode, changeTheme) {
         const _this = this;
-        
+
         const form = $('<form action="#" id="form"></form>');
 
         const controls = $('<div id="controls"></div>');
@@ -148,7 +152,8 @@ var _jsEditor;
 $(function() {
   const containerEl = $('#jsEditor');
 
-  const jsEditorMessages = new JsEditorMessages(Messages);
+  const _defLang = typeof defLang !== 'undefined' ? defLang : undefined;
+  const jsEditorMessages = new JsEditorMessages(Messages, _defLang);
 
   const saveAsFile = function(code, filename) {
     const blob = new Blob([code], {type: 'text/plain;charset=utf-8'});

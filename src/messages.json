@@ -1,5 +1,5 @@
 {
-  "def": {
+  "en": {
     "title": "Ludolf's Editor",
     "defaultCode": "alert(\"Let your code dance!\");",
     "runButton": "Run it!",
