@@ -44,7 +44,10 @@ const JsEditor = function(container, jsMessages, saveAsFile) {
     this._setupLayout = function(container) {
         const main = $('<div id="main"></div>');
         const editor = $('<div id="editorMain"></div>');
-        const workspace = $('<div id="workspaceMain"><div id="workspace">ws</div><div id="console">console</div></div>');
+        const workspace = $('<div id="workspaceMain">'
+                + '<div id="workspace"></div>'
+                + '<div id="terminalMain"><div id="terminal"></div></div>'
+            + '</div>');
 
         main.append(editor)
             .append(workspace);
@@ -52,6 +55,11 @@ const JsEditor = function(container, jsMessages, saveAsFile) {
         container.html(main);
 
         this._setupJsEditor(editor);
+
+        const help = $('#help');
+        const helpDiv = $('<div id="helpDiv"></div>');
+        helpDiv.html(help.html());
+        help.html(helpDiv);
 
         return main;
     }

@@ -29,3 +29,9 @@ Set up the JS variable `defLang` to the demanded language.
     </script>
 </head>
 ```  
+
+## Usage
+```
+var workspace = $('#workspace');
+var terminal = $('#terminal');
+```
