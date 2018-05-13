@@ -44,14 +44,10 @@ class JsEditor {
   _setupLayout(container) {
     const main = $('<div id="main"></div>');
     const editor = $('<div id="editorMain"></div>');
-    const workspace = $('<div id="workspace"></div>');
-    const help = $('<div id="help"></div>');
-    const cons = $('<div id="console"></div>');
+    const workspace = $('<div id="workspaceMain"><div id="workspace">ws</div><div id="console">console</div></div>');
 
     main.append(editor)
-        .append(workspace)
-        .append(help)
-        .append(cons);
+        .append(workspace);
 
     container.html(main);
 
