@@ -7,14 +7,12 @@ import FileSave from 'file-saver';
 
 import Messages from './messages.json';
 
-class JsEditorMessages {
+const JsEditorMessages = function(messages) {
 
-    constructor(messages) {
-        this._default_lang = 'def';
-        this._messages = messages;
-    }
+    this._default_lang = 'def';
+    this._messages = messages;
 
-    msg(title) {
+    this.msg = function(title) {
         let lang = (window.navigator && window.navigator.language) ? window.navigator.language.substring(0, 2) : this._default_lang;
 
         return (this._messages[lang] && this._messages[lang][title]) ? this._messages[lang][title] :
@@ -23,122 +21,126 @@ class JsEditorMessages {
     }
 }
 
-class JsEditor {
+const JsEditor = function(container, jsMessages, saveAsFile) {
 
-  constructor(container, jsMessages, saveAsFile) {
     this._container = container;
     this._messages = jsMessages;
     this._saveAsFile = saveAsFile;
 
     this._customCode = container.html();
-  }
   
-  _msg(title) {
-    return this._messages.msg(title);
-  }
-  
-  init() {
-    this._setupLayout(this._container);
-  }
+    this._msg = function(title) {
+        return this._messages.msg(title);
+    }
 
-  _setupLayout(container) {
-    const main = $('<div id="main"></div>');
-    const editor = $('<div id="editorMain"></div>');
-    const workspace = $('<div id="workspaceMain"><div id="workspace">ws</div><div id="console">console</div></div>');
+    this.init = function() {
+        this._setupLayout(this._container);
+    }
 
-    main.append(editor)
-        .append(workspace);
+    this._setupLayout = function(container) {
+        const main = $('<div id="main"></div>');
+        const editor = $('<div id="editorMain"></div>');
+        const workspace = $('<div id="workspaceMain"><div id="workspace">ws</div><div id="console">console</div></div>');
 
-    container.html(main);
+        main.append(editor)
+            .append(workspace);
 
-    this._setupJsEditor(editor);
+        container.html(main);
 
-    return main;
-  }
+        this._setupJsEditor(editor);
 
-  _setupJsEditor(container) {
-    const jseditor = $('<pre id="editor">' + (this._customCode ? this._customCode : this._msg('defaultCode')) + '</pre>');
-    const scriptBlock = $('<div id="script" style="display:none"></div>');
+        return main;
+    }
 
-    container.html(jseditor);
+    this._setupJsEditor = function(container) {
+        const _this = this;
 
-    const executeCode = (code) => this._executeCode(code, scriptBlock);
+        const jseditor = $('<pre id="editor">' + (this._customCode ? this._customCode : this._msg('defaultCode')) + '</pre>');
+        const scriptBlock = $('<div id="script" style="display:none"></div>');
 
-    ace.config.set('basePath', 'js/ace');
+        container.html(jseditor);
 
-    const aceEditor = ace.edit('editor');
-    aceEditor.session.setMode('ace/mode/javascript');
-    aceEditor.commands.addCommand({
-        name: 'Execute',
-        bindKey: { win: 'Ctrl-Enter',  mac: 'Command-Enter' },
-        exec: function(_editor) {
-             executeCode(_editor.getValue());
+        const executeCode = function(code) {
+            _this._executeCode(code, scriptBlock);
         }
-    });
-    aceEditor.setTheme("ace/theme/clouds");
-    aceEditor.focus();
 
-    this._setupControls(
-        container,
-        () => this._executeCode(aceEditor.getValue(), scriptBlock),
-        () => this._saveCode(aceEditor.getValue()),
-        (theme) => aceEditor.setTheme("ace/theme/" + theme)
-    );
+        ace.config.set('basePath', 'js/ace');
 
-    jseditor.after(scriptBlock);
+        const aceEditor = ace.edit('editor');
+        aceEditor.session.setMode('ace/mode/javascript');
+        aceEditor.commands.addCommand({
+            name: 'Execute',
+            bindKey: { win: 'Ctrl-Enter',  mac: 'Command-Enter' },
+            exec: function(_editor) {
+                 executeCode(_editor.getValue());
+            }
+        });
+        aceEditor.setTheme("ace/theme/clouds");
+        aceEditor.focus();
 
-    return jseditor;
-  }
+        this._setupControls(
+            container,
+            function(){ return _this._executeCode(aceEditor.getValue(), scriptBlock); },
+            function(){ return _this._saveCode(aceEditor.getValue()); },
+            function(theme){ return aceEditor.setTheme("ace/theme/" + theme); }
+        );
 
-  _setupControls(container, executeCode, saveCode, changeTheme) {
-    const form = $('<form action="#" id="form"></form>');
+        jseditor.after(scriptBlock);
 
-    const controls = $('<div id="controls"></div>');
+        return jseditor;
+    }
 
-    const themes = $('<select id="themes">'
-      + '<option value="clouds">' + this._msg('theme_clouds') + '</option>'
-      + '<option value="dracula">' + this._msg('theme_dracula') + '</option>'
-    + '</select>');
+    this._setupControls = function(container, executeCode, saveCode, changeTheme) {
+        const _this = this;
+        
+        const form = $('<form action="#" id="form"></form>');
 
-    themes.change(() => this._changeTheme(themes.val(), changeTheme));
+        const controls = $('<div id="controls"></div>');
 
-    const runButton = $('<button type="button" class="button run">' + this._msg('runButton') + '</button>');
-    const saveButton = $('<button type="button" class="button save">' + this._msg('saveButton') + '</button>');
+        const themes = $('<select id="themes">'
+          + '<option value="clouds">' + this._msg('theme_clouds') + '</option>'
+          + '<option value="dracula">' + this._msg('theme_dracula') + '</option>'
+        + '</select>');
 
-    runButton.click(() => executeCode());
-    saveButton.click(() => saveCode());
+        themes.change(function(){ return _this._changeTheme(themes.val(), changeTheme); });
 
-    controls.append(runButton);
-    controls.append(saveButton);
+        const runButton = $('<button type="button" class="button run">' + this._msg('runButton') + '</button>');
+        const saveButton = $('<button type="button" class="button save">' + this._msg('saveButton') + '</button>');
 
-    form.append(themes);
-    form.append(controls);
+        runButton.click(function() { return executeCode(); });
+        saveButton.click(function() { return saveCode(); });
 
-    container.append(form);
+        controls.append(runButton);
+        controls.append(saveButton);
 
-    themes.height(runButton.height());
+        form.append(themes);
+        form.append(controls);
 
-    return form;
-  }
+        container.append(form);
 
-  _executeCode(code, scriptBlock) {
-    let scriptEl = $(document.createElement("script"));
-    scriptEl.html(code);
-    scriptBlock.html(scriptEl);
-  }
+        themes.height(runButton.height());
 
-  _saveCode(code) {
-    this._saveAsFile(code, 'jseditor-' + new Date().toISOString().substr(0, 10) + '.txt')
-  }
+        return form;
+    }
 
-  _changeTheme(theme, changeEditorTheme) {
-    $('body').removeClass(function(index, className) {
-      return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
-    });
-    $('body').addClass('theme-' + theme);
+    this._executeCode = function(code, scriptBlock) {
+        let scriptEl = $(document.createElement("script"));
+        scriptEl.html(code);
+        scriptBlock.html(scriptEl);
+    }
 
-    changeEditorTheme(theme);
-  }
+    this._saveCode = function(code) {
+        this._saveAsFile(code, 'jseditor-' + new Date().toISOString().substr(0, 10) + '.txt')
+    }
+
+    this._changeTheme = function(theme, changeEditorTheme) {
+        $('body').removeClass(function(index, className) {
+          return (className.match(/(^|\s)theme-\S+/g) || []).join(' ');
+        });
+        $('body').addClass('theme-' + theme);
+
+        changeEditorTheme(theme);
+    }
 }
 
 var _jsEditor;
@@ -148,7 +150,7 @@ $(function() {
 
   const jsEditorMessages = new JsEditorMessages(Messages);
 
-  const saveAsFile = (code, filename) => {
+  const saveAsFile = function(code, filename) {
     const blob = new Blob([code], {type: 'text/plain;charset=utf-8'});
     FileSave.saveAs(blob, filename);
   }
