@@ -78,7 +78,7 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
 
         this._setupJsEditor(editor, help);
 
-        help.width(editor.width());
+        help.width(editor.outerWidth());
 
         return main;
     }
