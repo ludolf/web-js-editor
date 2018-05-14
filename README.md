@@ -20,14 +20,9 @@ dist/index.html
 ```
 
 ## Config
-Set up the JS variable `defLang` to the demanded language.
+Set the `lang` GET parameter to set up the app language.
 ```
-<head>
-    ...
-    <script>
-        var defLang = 'de'; // for German
-    </script>
-</head>
+index.html?lang=de 
 ```  
 
 ## Usage

@@ -1,88 +1,102 @@
 body {
-  padding: 1em;
-  background-color: lightsteelblue;
+    padding: 1em;
+    background-color: lightsteelblue;
 }
 
 #help {
-  background-color: #c0cddc;
-  color: #7e8fa3;
-  position: absolute;
-  top: 30em;
-  width: 48%;
-  vertical-align: top;
+    background-color: #c0cddc;
+    color: #7e8fa3;
+    position: absolute;
+    top: 30em;
+    width: 48%;
+    vertical-align: top;
 }
+
 #helpDiv {
-  padding: 1em;
-  font-style: italic;
+    padding: 1em;
+    font-style: italic;
 }
 
 #editor {
-  width: 100%;
-  height: 25em;
-  padding: 1em;
-  font-size: 1em;
+    width: 100%;
+    height: 25em;
+    padding: 1em;
+    font-size: 1em;
 }
+
 #editorMain {
-  width: 49%;
-  float: left;
-  top: 0;
-  left: 0;
+    width: 49%;
+    float: left;
+    top: 0;
+    left: 0;
 }
+
 #workspaceMain {
-  background-color: white;
-  width: 49%;
-  float: right;
+    background-color: white;
+    width: 49%;
+    float: right;
 }
+
 #workspace {
-  height: 25em;
+    height: 25em;
 }
+
 #terminalMain {
-  background-color: #ebebeb;
+    background-color: #ebebeb;
 }
+
 #terminal {
-  padding: 1em;
-  font-family: monospace;
-  font-size: 1.2em;
+    padding: 1em;
+    font-family: monospace;
+    font-size: 1.2em;
 }
+
 #controls {
-  float: left;
+    float: left;
 }
-#controls .button{
-  margin-right: 1em;
-  padding: 0 1.5em 0.2em 1.5em;
-  border: 0;
-  font-size: 1.2em;
-  background-color: steelblue;
-  color: white;
+
+#controls .button {
+    margin-right: 1em;
+    padding: 0 1.5em 0.2em 1.5em;
+    border: 0;
+    font-size: 1.2em;
+    background-color: steelblue;
+    color: white;
 }
+
 #themes {
-  color: gray;
-  background-color: white;
-  font-size: 1em;
-  padding: 0 1em 0.2em 1em;
-  margin-right: 1em;
-  border: 0;
+    color: gray;
+    background-color: white;
+    font-size: 1em;
+    padding: 0 1em 0.2em 1em;
+    margin-right: 1em;
+    border: 0;
 }
 
 body.theme-dracula {
-  background-color: black;
+    background-color: black;
 }
+
 .theme-dracula #help {
-  background-color: #282a36;
-  color: #626485;
+    background-color: #282a36;
+    color: #626485;
 }
+
 .theme-dracula #controls .button {
-  background-color: gray;
-  color: white;
+    background-color: gray;
+    color: white;
 }
+
 .theme-dracula #themes {
-  background-color: #282a36;
-  color: white;
+    background-color: #282a36;
+    color: white;
 }
+
 .theme-dracula #workspaceMain {
-  background-color: #ebebeb;
+    background-color: #ebebeb;
 }
+
 .theme-dracula #terminalMain {
-  background-color: gray;
-  color: white;
+    background-color: gray;
+    color: white;
 }
