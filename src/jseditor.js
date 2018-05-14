@@ -6,6 +6,7 @@ import ace from 'ace-builds/src-min-noconflict/ace.js';
 import FileSave from 'file-saver';
 
 import Messages from './messages.json';
+import {resizer} from './util/resizer';
 
 const JsEditorMessages = function (messages) {
 
@@ -70,19 +71,19 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
 
         container.html(main);
 
-        this._setupJsEditor(editor);
-
         const help = $('#help');
         const helpDiv = $('<div id="helpDiv"></div>');
         helpDiv.html(help.html());
         help.html(helpDiv);
+
+        this._setupJsEditor(editor, help);
 
         help.width(editor.width());
 
         return main;
     }
 
-    this._setupJsEditor = function (container) {
+    this._setupJsEditor = function (container, help) {
         const _this = this;
 
         const jseditor = $('<pre id="editor">' + (this._customCode ? this._customCode : this._msg('defaultCode')) + '</pre>');
@@ -123,6 +124,10 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
         );
 
         jseditor.after(scriptBlock);
+
+        resizer(jseditor, help, function () {
+            aceEditor.resize();
+        });
 
         return jseditor;
     }

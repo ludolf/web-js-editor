@@ -1,0 +1,7 @@
+#resizer {
+    background-color: transparent !important;
+    position: absolute;
+    height: 0.5em;
+    z-index: 1000;
+    cursor: row-resize;
+}
