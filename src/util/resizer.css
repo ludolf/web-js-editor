@@ -1,4 +1,4 @@
-#resizer {
+.resizer {
     background-color: transparent !important;
     position: absolute;
     height: 0.5em;

@@ -9,7 +9,7 @@ export const resizer = function (obj, obj2, onResize) {
         obj2 = $(obj2);
     }
 
-    const div = $('<div id="resizer"></div>');
+    const div = $('<div class="resizer"></div>');
 
     div.css('top', obj.position().top + Math.round(obj.outerHeight()) + 'px');
     div.css('left', obj.position().left + 'px');
