@@ -7,7 +7,9 @@ module.exports = {
     entry: './src/jseditor.js',
     output: {
         filename: 'jseditor.js',
-        path: path.resolve(__dirname, 'dist', 'js')
+        path: path.resolve(__dirname, 'dist', 'js'),
+        libraryTarget: 'var',
+        library: 'terminal'
     },
     module: {
         rules: [{

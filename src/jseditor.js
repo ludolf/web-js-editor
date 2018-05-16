@@ -193,6 +193,8 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
 
 var _jsEditor;
 
+
+
 $(function () {
     const containerEl = $('#jsEditor');
 
@@ -207,5 +209,12 @@ $(function () {
     _jsEditor.init();
 
     document.title = jsEditorMessages.msg('title');
-
 });
+
+export const print = function(text) {
+    $('#terminal').append('<p>' + text + '</p>');
+};
+
+export const clean = function() {
+    $('#terminal').html('');
+};

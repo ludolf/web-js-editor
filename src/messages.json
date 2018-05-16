@@ -1,7 +1,7 @@
 {
   "en": {
     "title": "Ludolf's Editor",
-    "defaultCode": "alert(\"Let your code dance!\");",
+    "defaultCode": "terminal.print(\"Let your code dance!\");",
     "runButton": "Run it!",
     "saveButton": "Save",
     "theme_clouds": "Clouds",
@@ -9,7 +9,7 @@
   },
   "de": {
     "title": "Ludolfs Editor",
-    "defaultCode": "alert(\"Lass deinen Code tanzen!\");",
+    "defaultCode": "terminal.print(\"Lass deinen Code tanzen!\");",
     "runButton": "Ausführen!",
     "saveButton": "Speichern",
     "theme_clouds": "Wolken",

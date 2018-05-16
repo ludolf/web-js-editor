@@ -31,5 +31,6 @@ Execute the code by `Ctrl+Enter`.
 You can use the workspace and terminal:
 ```
 var workspace = $('#workspace');
-var terminal = $('#terminal');
+terminal.print('some text');
+terminal.clean();
 ```
