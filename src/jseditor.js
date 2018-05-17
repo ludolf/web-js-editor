@@ -172,6 +172,9 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
     }
 
     this._executeCode = function (code, scriptBlock) {
+        $('#workspace').html('');
+        $('#terminal').html('');
+
         const scriptEl = $(document.createElement("script"));
         scriptEl.html(code);
         scriptBlock.html(scriptEl);
