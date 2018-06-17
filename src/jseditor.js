@@ -8,7 +8,7 @@ import FileSave from 'file-saver';
 import Messages from './messages.json';
 import {resizer} from './util/resizer';
 
-const JsEditorMessages = function (messages) {
+export const JsEditorMessages = function (messages) {
 
     this._default_lang_name = 'en';
     this._messages = messages;
