@@ -1,5 +1,5 @@
 {
-  "name": "ludolfs-web-js-editor",
+  "name": "ludolfs-web-editor",
   "version": "1.0.0",
   "description": "Ludolf's Web JS Editor",
   "main": "dist/jseditor.js",
