@@ -113,13 +113,20 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
         this._setupControls(
                 container,
                 function () {
-                    return _this._executeCode(aceEditor.getValue(), scriptBlock);
+                    _this._executeCode(aceEditor.getValue(), scriptBlock);
+                    aceEditor.focus();
                 },
                 function () {
-                    return _this._saveCode(aceEditor.getValue());
+                    _this._saveCode(aceEditor.getValue());
+                    aceEditor.focus();
                 },
                 function (theme) {
-                    return aceEditor.setTheme("ace/theme/" + theme);
+                    aceEditor.setTheme("ace/theme/" + theme);
+                    aceEditor.focus();
+                },
+                function (text) {
+                    aceEditor.insert(text);
+                    aceEditor.focus();
                 }
         );
 
@@ -132,7 +139,7 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
         return jseditor;
     }
 
-    this._setupControls = function (container, executeCode, saveCode, changeTheme) {
+    this._setupControls = function (container, executeCode, saveCode, changeTheme, typeText) {
         const _this = this;
 
         const form = $('<form action="#" id="form"></form>');
@@ -150,6 +157,9 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
 
         const runButton = $('<button type="button" class="button run">' + this._msg('runButton') + '</button>');
         const saveButton = $('<button type="button" class="button save">' + this._msg('saveButton') + '</button>');
+        const dollarButton = $('<button type="button" class="key dollar">&#36;</button>');
+        const bracketOpenButton = $('<button type="button" class="key bracket_open">&#123;</button>');
+        const bracketCloseButton = $('<button type="button" class="key bracket_close">&#125;</button>');
 
         runButton.click(function () {
             return executeCode();
@@ -157,9 +167,21 @@ const JsEditor = function (container, jsMessages, saveAsFile) {
         saveButton.click(function () {
             return saveCode();
         });
+        dollarButton.click(function () {
+            return typeText('$');
+        });
+        bracketOpenButton.click(function () {
+            return typeText('{');
+        });
+        bracketCloseButton.click(function () {
+            return typeText('}');
+        });
 
         controls.append(runButton);
         controls.append(saveButton);
+        controls.append(dollarButton);
+        controls.append(bracketOpenButton);
+        controls.append(bracketCloseButton);
 
         form.append(themes);
         form.append(controls);

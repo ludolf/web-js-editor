@@ -5,7 +5,6 @@ body {
 
 #help {
     background-color: #c0cddc;
-    color: #7e8fa3;
     position: absolute;
     top: 30em;
     width: 48%;
@@ -14,7 +13,6 @@ body {
 
 #helpDiv {
     padding: 1em;
-    font-style: italic;
 }
 
 #editor {
@@ -66,6 +64,16 @@ body {
     font-size: 1.2em;
     background-color: steelblue;
     color: white;
+    cursor: pointer;
+}
+#controls .key {
+    margin-right: 0.5em;
+    padding: 0 0.5em 0.2em 0.5em;
+    border: 0;
+    font-size: 1.2em;
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
 }
 
 #themes {
@@ -73,7 +81,7 @@ body {
     background-color: white;
     font-size: 1em;
     padding: 0 1em 0.2em 1em;
-    margin-right: 1em;
+    margin-left: 1em;
     border: 0;
 }
 
@@ -82,13 +90,18 @@ body.theme-dracula {
 }
 
 .theme-dracula #help {
-    background-color: #282a36;
-    color: #626485;
+    background-color: darkslategrey;
+    color: lightgray;
 }
 
 .theme-dracula #controls .button {
     background-color: gray;
     color: white;
+}
+
+.theme-dracula #controls .key {
+    background-color: dimgrey;
+    color: back;
 }
 
 .theme-dracula #themes {
