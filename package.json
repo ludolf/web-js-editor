@@ -1,6 +1,6 @@
 {
   "name": "ludolfs-web-editor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Ludolf's Web JS Editor",
   "main": "dist/jseditor.js",
   "files": [
